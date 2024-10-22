@@ -6,17 +6,31 @@ import {
   MotionValue,
   useTransform,
   useMotionValueEvent,
+  useScroll,
 } from "framer-motion";
 import * as THREE from "three";
 import Pikachu from "./model";
 
 type ActionName = "idle2" | "WalkStanding" | "Run" | "AttackTackle" | "Faint";
 
-interface Section01Props {
-  scrollYProgress: MotionValue<number>;
-}
 
-const Section01 = ({ scrollYProgress }: Section01Props) => {
+
+const Section01 = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target : ref,
+    offset : ["start end", "end end"],
+  });
+  
+  
+
+  // useEffect(()=>{
+  //   window.addEventListener('scroll', ()=>{
+  //     console.log(scrollYProgress.get());
+  //   })
+  //   return 
+  // }, [])
+
   const triggerRef = useRef<HTMLDivElement>(null);
   const sectionProgress = useTransform(scrollYProgress, [0, 0.57], [0, 1]);
   const [animation, setAnimation] = useState<ActionName>("idle2");
@@ -46,7 +60,7 @@ const Section01 = ({ scrollYProgress }: Section01Props) => {
   );
 
   return (
-    <div className="h-[800vh] relative bg-yellow-400">
+    <div ref={ref} className="h-[800vh] relative bg-yellow-400">
       <div
         ref={triggerRef}
         className="sticky top-0 h-screen w-full overflow-hidden"

@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Canvas, useThree, useFrame } from "@react-three/fiber";
-import { motion, useTransform, MotionValue } from "framer-motion";
+import { motion, useTransform, MotionValue, useScroll } from "framer-motion";
 import { Model } from "./Model";
 import { PerspectiveCamera, OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
@@ -77,15 +77,19 @@ const CameraController = ({
   return null;
 };
 
-const Section02 = ({ scrollYProgress }: Section02Props) => {
+const Section02 = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target : ref,
+    offset : ["start start", "end end"],
+  });
+
   const sectionProgress = useTransform(scrollYProgress, [0.57, 1], [0, 1]);
 
-  window.addEventListener("scroll", () => {
-    console.log(sectionProgress.get());
-  });
+
   const cameraPosition = useTransform(
     sectionProgress,
-    [0, 0.57, 0.57 + (0.57 * 1) / 3, 1],
+    [0, 0.33, 0.66, 1],
     [
       new THREE.Vector3(-5, 0, 30),
       new THREE.Vector3(-5, 0, 25),
