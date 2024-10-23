@@ -43,35 +43,33 @@ interface PikachuProps {
 
 const Pikachu = ({ animation, position }: PikachuProps) => {
   const group = useRef<THREE.Group>(null);
-  const { scene, animations } = useGLTF("/models/Pikachu.glb") as GLTFResult;
+  const { scene, animations } = useGLTF("/models/Pika.glb") as GLTFResult;
   const clone = React.useMemo(() => SkeletonUtils.clone(scene), [scene]);
   const { nodes, materials } = useGraph(clone) as GLTFResult;
   const { actions } = useAnimations(animations, group);
-
-  // console.log(actions);
 
   const [currentAnimation, setCurrentAnimation] =
     useState<ActionName>("WalkStanding");
 
   // 텍스처 로드
-  const bodyTexture = useTexture("/tex/PikachuBodyTex.jpg");
-  const eyeTexture = useTexture("/tex/PikachuEyeTextureAtlas.png");
-  const mouthTexture = useTexture("/tex/PikachuMouthTextureAtlas.png");
+  // const bodyTexture = useTexture("/tex/PikachuBodyTex.jpg");
+  // const eyeTexture = useTexture("/tex/PikachuEyeTextureAtlas.png");
+  // const mouthTexture = useTexture("/tex/PikachuMouthTextureAtlas.png");
 
-  useEffect(() => {
-    // 텍스처 적용
-    scene.traverse((child) => {
-      if (child instanceof THREE.Mesh) {
-        if (child.material.name === "body") {
-          child.material.map = bodyTexture;
-        } else if (child.material.name === "eye") {
-          child.material.map = eyeTexture;
-        } else if (child.material.name === "mouth") {
-          child.material.map = mouthTexture;
-        }
-      }
-    });
-  }, [scene, bodyTexture, eyeTexture, mouthTexture]);
+  // useEffect(() => {
+  //   // 텍스처 적용
+  //   scene.traverse((child) => {
+  //     if (child instanceof THREE.Mesh) {
+  //       if (child.material.name === "body") {
+  //         child.material.map = bodyTexture;
+  //       } else if (child.material.name === "eye") {
+  //         child.material.map = eyeTexture;
+  //       } else if (child.material.name === "mouth") {
+  //         child.material.map = mouthTexture;
+  //       }
+  //     }
+  //   });
+  // }, [scene, bodyTexture, eyeTexture, mouthTexture]);
 
   useEffect(() => {
     // 이전 애니메이션 정지
@@ -129,4 +127,4 @@ const Pikachu = ({ animation, position }: PikachuProps) => {
 
 export default Pikachu;
 
-useGLTF.preload("/models/Pikachu.glb");
+useGLTF.preload("/models/Pika.glb");

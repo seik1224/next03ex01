@@ -10,9 +10,8 @@ import { Charmander } from "@/components/charmander";
 
 export function Model() {
   const group = useRef();
-  const { nodes, materials, scene, animations } = useGLTF("/models/model.glb");
+
   const three = useThree();
-  console.log(scene);
 
   useEffect(() => {
     three.camera.position.set(-5, 0, 25);
@@ -26,5 +25,3 @@ export function Model() {
     </>
   );
 }
-
-useGLTF.preload("/models/model.glb");

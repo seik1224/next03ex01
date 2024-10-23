@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Canvas, useThree } from "@react-three/fiber";
-import { useGLTF } from "@react-three/drei";
+import { OrbitControls, useGLTF } from "@react-three/drei";
 import {
   motion,
   MotionValue,
@@ -9,7 +9,7 @@ import {
   useScroll,
 } from "framer-motion";
 import * as THREE from "three";
-import Pikachu from "./model";
+import Pikachu from "./Model";
 
 type ActionName = "idle2" | "WalkStanding" | "Run" | "AttackTackle" | "Faint";
 
@@ -64,6 +64,7 @@ const Section01 = () => {
           <ambientLight intensity={2} />
           <pointLight position={[10, 10, 10]} />
           <Pikachu animation={animation} position={position} />
+          {/* <OrbitControls /> */}
         </Canvas>
       </div>
       <div className="absolute top-0 left-0 w-full h-[800vh] pointer-events-none">
