@@ -88,26 +88,37 @@ const Section02 = () => {
 
   const cameraPosition = useTransform(
     sectionProgress,
-    [0, 0.33, 0.66, 1],
+    [0, 0.23, 0.43, 0.56, 0.76, 0.9, 1],
     [
       new THREE.Vector3(0, 0, 30),
       new THREE.Vector3(0, 0, 25),
+      new THREE.Vector3(0, 0, 25),
       new THREE.Vector3(7, 0, 15),
+      new THREE.Vector3(7, 0, 15),
+      new THREE.Vector3(-10, 0, 5),
       new THREE.Vector3(-10, 0, 5),
     ]
   );
 
   const backgroundColor = useTransform(
     sectionProgress,
-    [0, 0.57, 0.57 + (0.57 * 1) / 3, 1],
-    ["#1c6c00", "#1c6c00", "#003b8b", "#8b0000"]
+    [0, 0.23, 0.43, 0.56, 0.76, 0.9, 1],
+    [
+      "#1c6c00",
+      "#1c6c00",
+      "#1c6c00",
+      "#003b8b",
+      "#003b8b",
+      "#8b0000",
+      "#8b0000",
+    ]
   );
 
-  useEffect(() => {
-    window.addEventListener("scroll", () => {
-      console.log(scrollYProgress.get());
-    });
-  }, [scrollYProgress]);
+  // useEffect(() => {
+  //   window.addEventListener("scroll", () => {
+  //     console.log(scrollYProgress.get());
+  //   });
+  // }, [scrollYProgress]);
   return (
     <motion.section
       ref={ref}
@@ -124,14 +135,16 @@ const Section02 = () => {
       <div className="absolute top-0 left-0 w-full h-[300vh] pointer-events-none">
         <motion.div
           className="w-full h-screen flex items-center justify-center border-4 border-green-500"
-          style={{ opacity: useTransform(sectionProgress, [0, 0.33], [0, 1]) }}
+          style={{
+            opacity: useTransform(sectionProgress, [0.23, 0.33], [0, 1]),
+          }}
         >
           <h2 className="text-2xl font-bold">페이지 5</h2>
         </motion.div>
         <motion.div
           className="w-full h-screen flex items-center justify-center border-4 border-blue-500"
           style={{
-            opacity: useTransform(sectionProgress, [0.33, 0.66], [0, 1]),
+            opacity: useTransform(sectionProgress, [0.56, 0.66], [0, 1]),
           }}
         >
           <h2 className="text-2xl font-bold">페이지 6</h2>
@@ -139,7 +152,7 @@ const Section02 = () => {
         <motion.div
           className="w-full h-screen flex items-center justify-center border-4 border-red-500"
           style={{
-            opacity: useTransform(sectionProgress, [0.66, 1], [0, 1]),
+            opacity: useTransform(sectionProgress, [0.9, 1], [0, 1]),
           }}
         >
           <h2 className="text-2xl font-bold">페이지 7</h2>

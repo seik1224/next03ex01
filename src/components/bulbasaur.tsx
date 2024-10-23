@@ -30,22 +30,32 @@ export function Bulbasaur(props: JSX.IntrinsicElements["group"]) {
   return (
     <group {...props} dispose={null}>
       <mesh
+        castShadow
+        receiveShadow
         geometry={nodes.Bulbasaur_92CFB0.geometry}
         material={materials.Bulbasaur_92CFB0}
       />
       <mesh
+        castShadow
+        receiveShadow
         geometry={nodes.Bulbasaur_FFFFFF.geometry}
         material={materials.Bulbasaur_FFFFFF}
       />
       <mesh
+        castShadow
+        receiveShadow
         geometry={nodes.Bulbasaur_AD3946.geometry}
         material={materials.Bulbasaur_AD3946}
       />
       <mesh
+        castShadow
+        receiveShadow
         geometry={nodes.Bulbasaur_6BA966.geometry}
         material={materials.Bulbasaur_6BA966}
       />
       <mesh
+        castShadow
+        receiveShadow
         geometry={nodes.Bulbasaur_5C8A66.geometry}
         material={materials.Bulbasaur_5C8A66}
       />

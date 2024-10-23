@@ -20,19 +20,19 @@ const Section01 = () => {
     offset: ["start start", "end end"],
   });
 
-  // useEffect(() => {
-  //   window.addEventListener("scroll", () => {
-  //     console.log(scrollYProgress.get());
-  //   });
-  // }, [scrollYProgress]);
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      console.log(scrollYProgress.get());
+    });
+  }, [scrollYProgress]);
 
   const triggerRef = useRef<HTMLDivElement>(null);
-  const sectionProgress = useTransform(scrollYProgress, [0, 0.57], [0, 1]);
+  // const sectionProgress = useTransform(scrollYProgress, [0, 0.57], [0, 1]);
   const [animation, setAnimation] = useState<ActionName>("idle2");
 
-  const animationState = useTransform(sectionProgress, (value) => {
+  const animationState = useTransform(scrollYProgress, (value) => {
     if (value < 0.05) return "idle2";
-    if (value < 0.25) return "WalkStanding";
+    if (value < 0.1) return "WalkStanding";
     if (value < 0.5) return "Run";
     if (value < 0.75) return "AttackTackle";
     return "Faint";
@@ -43,13 +43,13 @@ const Section01 = () => {
   });
 
   const position = useTransform(
-    sectionProgress,
+    scrollYProgress,
     [0, 0.25, 0.5, 0.75, 1],
     [
       new THREE.Vector3(0, -1.5, 3.5), // 매우 가까이
       new THREE.Vector3(0, 0, -5), // 멀어짐
       new THREE.Vector3(-2, 0, 0), // 왼쪽으로 이동
-      new THREE.Vector3(2, 0, 0), // 오른쪽으로 이동
+      new THREE.Vector3(-2, 0, 0), // 오른쪽으로 이동
       new THREE.Vector3(2, 0, 0), // 마지막 위치 유지
     ]
   );
@@ -70,14 +70,14 @@ const Section01 = () => {
       <div className="absolute top-0 left-0 w-full h-[800vh] pointer-events-none">
         <motion.div
           className="h-[200vh] flex items-center justify-center"
-          style={{ opacity: useTransform(sectionProgress, [0, 0.25], [1, 0]) }}
+          style={{ opacity: useTransform(scrollYProgress, [0, 0.25], [1, 0]) }}
         >
           <h2 className="text-2xl font-bold">로고 섹션</h2>
         </motion.div>
         <motion.div
           className="h-[200vh] flex items-center justify-center"
           style={{
-            opacity: useTransform(sectionProgress, [0.25, 0.5], [0, 1]),
+            opacity: useTransform(scrollYProgress, [0.25, 0.5], [0, 1]),
           }}
         >
           <h2 className="text-2xl font-bold">텍스트 섹션 1</h2>
@@ -85,14 +85,14 @@ const Section01 = () => {
         <motion.div
           className="h-[200vh] flex items-center justify-center"
           style={{
-            opacity: useTransform(sectionProgress, [0.5, 0.75], [0, 1]),
+            opacity: useTransform(scrollYProgress, [0.5, 0.75], [0, 1]),
           }}
         >
           <h2 className="text-2xl font-bold">텍스트 섹션 2</h2>
         </motion.div>
         <motion.div
           className="h-[200vh] flex items-center justify-center"
-          style={{ opacity: useTransform(sectionProgress, [0.75, 1], [0, 1]) }}
+          style={{ opacity: useTransform(scrollYProgress, [0.75, 1], [0, 1]) }}
         >
           <h2 className="text-2xl font-bold">텍스트 섹션 3</h2>
         </motion.div>
