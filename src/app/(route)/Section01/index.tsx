@@ -13,23 +13,18 @@ import Pikachu from "./model";
 
 type ActionName = "idle2" | "WalkStanding" | "Run" | "AttackTackle" | "Faint";
 
-
-
 const Section01 = () => {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
-    target : ref,
-    offset : ["start end", "end end"],
+    target: ref,
+    offset: ["start start", "end end"],
   });
-  
-  
 
-  // useEffect(()=>{
-  //   window.addEventListener('scroll', ()=>{
+  // useEffect(() => {
+  //   window.addEventListener("scroll", () => {
   //     console.log(scrollYProgress.get());
-  //   })
-  //   return 
-  // }, [])
+  //   });
+  // }, [scrollYProgress]);
 
   const triggerRef = useRef<HTMLDivElement>(null);
   const sectionProgress = useTransform(scrollYProgress, [0, 0.57], [0, 1]);

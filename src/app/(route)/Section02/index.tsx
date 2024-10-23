@@ -80,19 +80,18 @@ const CameraController = ({
 const Section02 = () => {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
-    target : ref,
-    offset : ["start start", "end end"],
+    target: ref,
+    offset: ["start end", "end end"],
   });
 
-  const sectionProgress = useTransform(scrollYProgress, [0.57, 1], [0, 1]);
-
+  const sectionProgress = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   const cameraPosition = useTransform(
     sectionProgress,
     [0, 0.33, 0.66, 1],
     [
-      new THREE.Vector3(-5, 0, 30),
-      new THREE.Vector3(-5, 0, 25),
+      new THREE.Vector3(0, 0, 30),
+      new THREE.Vector3(0, 0, 25),
       new THREE.Vector3(7, 0, 15),
       new THREE.Vector3(-10, 0, 5),
     ]
@@ -103,8 +102,18 @@ const Section02 = () => {
     [0, 0.57, 0.57 + (0.57 * 1) / 3, 1],
     ["#1c6c00", "#1c6c00", "#003b8b", "#8b0000"]
   );
+
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      console.log(scrollYProgress.get());
+    });
+  }, [scrollYProgress]);
   return (
-    <motion.section className="h-[300vh] relative " style={{ backgroundColor }}>
+    <motion.section
+      ref={ref}
+      className="h-[300vh] relative "
+      style={{ backgroundColor }}
+    >
       <div className="sticky top-0 h-screen  w-full overflow-hidden">
         <Canvas shadows>
           <CameraController position={cameraPosition} />
@@ -114,34 +123,26 @@ const Section02 = () => {
       </div>
       <div className="absolute top-0 left-0 w-full h-[300vh] pointer-events-none">
         <motion.div
-          className="w-full h-screen items-center justify-center border-4 border-green-500"
-          style={{ opacity: useTransform(sectionProgress, [0, 0.57], [0, 1]) }}
+          className="w-full h-screen flex items-center justify-center border-4 border-green-500"
+          style={{ opacity: useTransform(sectionProgress, [0, 0.33], [0, 1]) }}
         >
-          <h2>페이지 5</h2>
+          <h2 className="text-2xl font-bold">페이지 5</h2>
         </motion.div>
         <motion.div
-          className="w-full h-screen items-center justify-center border-4 border-blue-500"
+          className="w-full h-screen flex items-center justify-center border-4 border-blue-500"
           style={{
-            opacity: useTransform(
-              sectionProgress,
-              [0.57, 0.57 + (0.57 * 1) / 3],
-              [0, 1]
-            ),
+            opacity: useTransform(sectionProgress, [0.33, 0.66], [0, 1]),
           }}
         >
-          <h2>페이지 6</h2>
+          <h2 className="text-2xl font-bold">페이지 6</h2>
         </motion.div>
         <motion.div
-          className="w-full h-screen items-center justify-center border-4 border-red-500"
+          className="w-full h-screen flex items-center justify-center border-4 border-red-500"
           style={{
-            opacity: useTransform(
-              sectionProgress,
-              [0.57 + (0.57 * 1) / 3, 1],
-              [0, 1]
-            ),
+            opacity: useTransform(sectionProgress, [0.66, 1], [0, 1]),
           }}
         >
-          <h2>페이지 7</h2>
+          <h2 className="text-2xl font-bold">페이지 7</h2>
         </motion.div>
       </div>
     </motion.section>

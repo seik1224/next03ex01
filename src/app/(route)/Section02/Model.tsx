@@ -4,6 +4,9 @@ import { useThree } from "@react-three/fiber";
 import { MotionValue, useTransform } from "framer-motion";
 import { motion } from "framer-motion-3d";
 import * as THREE from "three";
+import { Bulbasaur } from "@/components/bulbasaur";
+import { Squirtle } from "@/components/squirtle";
+import { Charmander } from "@/components/charmander";
 
 export function Model() {
   const group = useRef();
@@ -17,15 +20,9 @@ export function Model() {
 
   return (
     <>
-      <Circle position={[-5, 0, 20]}>
-        <meshStandardMaterial color={"#00ff00"} />
-      </Circle>
-      <Circle position={[7, 0, 10]}>
-        <meshStandardMaterial color={"#0000ff"} />
-      </Circle>
-      <Circle position={[-10, 0, 0]}>
-        <meshStandardMaterial color={"#ff00ff"} />
-      </Circle>
+      <Bulbasaur position={[0, 0, 20]} scale={0.1} />
+      <Squirtle position={[7, 0, 10]} scale={0.1} />
+      <Charmander position={[-10, 0, 0]} scale={0.1} />
     </>
   );
 }
