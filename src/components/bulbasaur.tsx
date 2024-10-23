@@ -4,32 +4,50 @@ Command: npx gltfjsx@6.5.2 public/models/bulbasaur.glb -o src/components/bulbasa
 */
 
 import * as THREE from "three";
-import React, { useMemo } from "react";
+import React from "react";
 import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 
 type GLTFResult = GLTF & {
   nodes: {
-    Bulbasaur_Grass: THREE.Mesh;
+    Bulbasaur_92CFB0: THREE.Mesh;
+    Bulbasaur_FFFFFF: THREE.Mesh;
+    Bulbasaur_AD3946: THREE.Mesh;
+    Bulbasaur_6BA966: THREE.Mesh;
+    Bulbasaur_5C8A66: THREE.Mesh;
   };
-  materials: {};
+  materials: {
+    Bulbasaur_92CFB0: THREE.MeshStandardMaterial;
+    Bulbasaur_FFFFFF: THREE.MeshStandardMaterial;
+    Bulbasaur_AD3946: THREE.MeshStandardMaterial;
+    Bulbasaur_6BA966: THREE.MeshStandardMaterial;
+    Bulbasaur_5C8A66: THREE.MeshStandardMaterial;
+  };
 };
 
 export function Bulbasaur(props: JSX.IntrinsicElements["group"]) {
   const { nodes, materials } = useGLTF("/models/bulbasaur.glb") as GLTFResult;
-
-  const greenMaterial = new THREE.MeshStandardMaterial({
-    color: "#92ceb0",
-    roughness: 0.3,
-    metalness: 0.8,
-  });
-
   return (
     <group {...props} dispose={null}>
       <mesh
-        geometry={nodes.Bulbasaur_Grass.geometry}
-        material={greenMaterial}
-        rotation={[Math.PI / 2, 0, 0]}
+        geometry={nodes.Bulbasaur_92CFB0.geometry}
+        material={materials.Bulbasaur_92CFB0}
+      />
+      <mesh
+        geometry={nodes.Bulbasaur_FFFFFF.geometry}
+        material={materials.Bulbasaur_FFFFFF}
+      />
+      <mesh
+        geometry={nodes.Bulbasaur_AD3946.geometry}
+        material={materials.Bulbasaur_AD3946}
+      />
+      <mesh
+        geometry={nodes.Bulbasaur_6BA966.geometry}
+        material={materials.Bulbasaur_6BA966}
+      />
+      <mesh
+        geometry={nodes.Bulbasaur_5C8A66.geometry}
+        material={materials.Bulbasaur_5C8A66}
       />
     </group>
   );

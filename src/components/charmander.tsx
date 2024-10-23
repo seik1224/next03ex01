@@ -10,25 +10,68 @@ import { GLTF } from "three-stdlib";
 
 type GLTFResult = GLTF & {
   nodes: {
-    Charmander_Fire: THREE.Mesh;
+    Charmander_F16451: THREE.Mesh;
+    Charmander_FEA77A: THREE.Mesh;
+    Charmander_ECEEC7: THREE.Mesh;
+    Charmander_Black: THREE.Mesh;
+    Charmander_White: THREE.Mesh;
+    Charmander_EC6953: THREE.Mesh;
+    Charmander_7D2821: THREE.Mesh;
+    Charmander_82B2F3: THREE.Mesh;
+    Charmander_384C68: THREE.Mesh;
   };
-  materials: {};
+  materials: {
+    Charmander_F16451: THREE.MeshStandardMaterial;
+    Charmander_FEA77A: THREE.MeshStandardMaterial;
+    Charmander_ECEEC7: THREE.MeshStandardMaterial;
+    Charmander_Black: THREE.MeshStandardMaterial;
+    Charmander_White: THREE.MeshStandardMaterial;
+    Charmander_EC6953: THREE.MeshStandardMaterial;
+    Charmander_7D2821: THREE.MeshStandardMaterial;
+    Charmander_82B2F3: THREE.MeshStandardMaterial;
+    Charmander_384C68: THREE.MeshStandardMaterial;
+  };
 };
 
 export function Charmander(props: JSX.IntrinsicElements["group"]) {
   const { nodes, materials } = useGLTF("/models/charmander.glb") as GLTFResult;
-
-  const redMaterial = new THREE.MeshStandardMaterial({
-    color: "#f26451",
-    roughness: 0.3,
-    metalness: 0.8,
-  });
   return (
     <group {...props} dispose={null}>
       <mesh
-        geometry={nodes.Charmander_Fire.geometry}
-        material={redMaterial}
-        rotation={[Math.PI / 2, 0, 0]}
+        geometry={nodes.Charmander_F16451.geometry}
+        material={materials.Charmander_F16451}
+      />
+      <mesh
+        geometry={nodes.Charmander_FEA77A.geometry}
+        material={materials.Charmander_FEA77A}
+      />
+      <mesh
+        geometry={nodes.Charmander_ECEEC7.geometry}
+        material={materials.Charmander_ECEEC7}
+      />
+      <mesh
+        geometry={nodes.Charmander_Black.geometry}
+        material={materials.Charmander_Black}
+      />
+      <mesh
+        geometry={nodes.Charmander_White.geometry}
+        material={materials.Charmander_White}
+      />
+      <mesh
+        geometry={nodes.Charmander_EC6953.geometry}
+        material={materials.Charmander_EC6953}
+      />
+      <mesh
+        geometry={nodes.Charmander_7D2821.geometry}
+        material={materials.Charmander_7D2821}
+      />
+      <mesh
+        geometry={nodes.Charmander_82B2F3.geometry}
+        material={materials.Charmander_82B2F3}
+      />
+      <mesh
+        geometry={nodes.Charmander_384C68.geometry}
+        material={materials.Charmander_384C68}
       />
     </group>
   );

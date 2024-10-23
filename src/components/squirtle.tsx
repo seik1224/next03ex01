@@ -10,25 +10,56 @@ import { GLTF } from "three-stdlib";
 
 type GLTFResult = GLTF & {
   nodes: {
-    Squirtle_Water: THREE.Mesh;
+    Squirtle_Water_83CFDF: THREE.Mesh;
+    Squirtle_Water_E09AA4: THREE.Mesh;
+    Squirtle_Water_B76A91: THREE.Mesh;
+    Squirtle_Water_Black: THREE.Mesh;
+    Squirtle_Water_DCD36F: THREE.Mesh;
+    Squirtle_Water_AD7757: THREE.Mesh;
+    Squirtle_Water_White: THREE.Mesh;
   };
-  materials: {};
+  materials: {
+    Squirtle_Water_83CFDF: THREE.MeshStandardMaterial;
+    Squirtle_Water_E09AA4: THREE.MeshStandardMaterial;
+    Squirtle_Water_B76A91: THREE.MeshStandardMaterial;
+    Squirtle_Water_Black: THREE.MeshStandardMaterial;
+    Squirtle_Water_DCD36F: THREE.MeshStandardMaterial;
+    Squirtle_Water_AD7757: THREE.MeshStandardMaterial;
+    Squirtle_Water_White: THREE.MeshStandardMaterial;
+  };
 };
 
 export function Squirtle(props: JSX.IntrinsicElements["group"]) {
   const { nodes, materials } = useGLTF("/models/squirtle.glb") as GLTFResult;
-
-  const blueMaterial = new THREE.MeshStandardMaterial({
-    color: "#85cedf",
-    roughness: 0.3,
-    metalness: 0.8,
-  });
   return (
     <group {...props} dispose={null}>
       <mesh
-        geometry={nodes.Squirtle_Water.geometry}
-        material={blueMaterial}
-        rotation={[Math.PI / 2, 0, 0]}
+        geometry={nodes.Squirtle_Water_83CFDF.geometry}
+        material={materials.Squirtle_Water_83CFDF}
+      />
+      <mesh
+        geometry={nodes.Squirtle_Water_E09AA4.geometry}
+        material={materials.Squirtle_Water_E09AA4}
+      />
+      <mesh
+        geometry={nodes.Squirtle_Water_B76A91.geometry}
+        material={materials.Squirtle_Water_B76A91}
+      />
+      <mesh
+        geometry={nodes.Squirtle_Water_Black.geometry}
+        material={materials.Squirtle_Water_Black}
+      />
+      <mesh
+        geometry={nodes.Squirtle_Water_DCD36F.geometry}
+        material={materials.Squirtle_Water_DCD36F}
+      />
+      <mesh
+        geometry={nodes.Squirtle_Water_AD7757.geometry}
+        material={materials.Squirtle_Water_AD7757}
+      />
+      <mesh
+        geometry={nodes.Squirtle_Water_White.geometry}
+        material={materials.Squirtle_Water_White}
       />
     </group>
   );
