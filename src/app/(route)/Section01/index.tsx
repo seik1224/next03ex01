@@ -1,9 +1,8 @@
 import React, { useRef, useState, useEffect } from "react";
-import { Canvas, useThree } from "@react-three/fiber";
-import { OrbitControls, useGLTF } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
+import { useGLTF } from "@react-three/drei";
 import {
   motion,
-  MotionValue,
   useTransform,
   useMotionValueEvent,
   useScroll,
@@ -64,37 +63,112 @@ const Section01 = () => {
           <ambientLight intensity={2} />
           <pointLight position={[10, 10, 10]} />
           <Pikachu animation={animation} position={position} />
-          {/* <OrbitControls /> */}
         </Canvas>
       </div>
       <div className="absolute top-0 left-0 w-full h-[800vh] pointer-events-none">
-        <motion.div
-          className="h-[200vh] flex items-center justify-center"
-          style={{ opacity: useTransform(scrollYProgress, [0, 0.25], [1, 0]) }}
-        >
-          <h2 className="text-2xl font-bold">로고 섹션</h2>
+        <motion.div className="w-full h-[200vh] flex items-start justify-center pt-[10vh]">
+          <h2 className="text-2xl font-bold">
+            <img
+              className="max-w-[600px] w-full px-10"
+              src="/logo.svg"
+              alt="로고"
+            />
+          </h2>
         </motion.div>
+        <motion.div className="w-full h-[200vh] flex items-center justify-center"></motion.div>
         <motion.div
-          className="h-[200vh] flex items-center justify-center"
+          className="w-full h-[200vh] flex items-center justify-center px-[30px]"
           style={{
-            opacity: useTransform(scrollYProgress, [0.25, 0.5], [0, 1]),
+            opacity: useTransform(
+              scrollYProgress,
+              [0.6, 0.65, 0.65, 0.7],
+              [0, 1, 1, 0]
+            ),
           }}
         >
-          <h2 className="text-2xl font-bold">텍스트 섹션 1</h2>
+          <div className="w-[400px]"></div>
+          <div className="w-[400px] text-left">
+            <h2 className="text-2xl font-bold mb-4">Volt Tackle</h2>
+            <div className="flex items-center gap-4 mb-2">
+              <div className="flex items-center gap-2">
+                <span className="text-xs">위력</span>
+                <div className="flex space-x-1">
+                  {[1, 2, 3, 4, 5].map((_, index) => (
+                    <div
+                      key={index}
+                      className={`w-2 h-2 rounded-full ${
+                        index < 5 ? "bg-yellow-950" : "bg-gray-50"
+                      }`}
+                    ></div>
+                  ))}
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-xs">PP</span>
+                <div className="flex space-x-1">
+                  {[1, 2, 3, 4, 5].map((_, index) => (
+                    <div
+                      key={index}
+                      className={`w-2 h-2 rounded-full ${
+                        index < 3 ? "bg-yellow-950" : "bg-gray-50"
+                      }`}
+                    ></div>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <p className="text-xs">
+              전기를 한데 모아 돌진한다. 자신도 대상에게 준 피해의 1/3만큼 반동
+              피해를 받는다. 10% 확률로 상대를 마비 상태로 만든다.
+            </p>
+          </div>
         </motion.div>
         <motion.div
-          className="h-[200vh] flex items-center justify-center"
+          className="w-full h-[200vh] flex items-center justify-center px-[30px]"
           style={{
-            opacity: useTransform(scrollYProgress, [0.5, 0.75], [0, 1]),
+            opacity: useTransform(
+              scrollYProgress,
+              [0.85, 0.9, 0.9, 1],
+              [0, 1, 1, 0]
+            ),
           }}
         >
-          <h2 className="text-2xl font-bold">텍스트 섹션 2</h2>
-        </motion.div>
-        <motion.div
-          className="h-[200vh] flex items-center justify-center"
-          style={{ opacity: useTransform(scrollYProgress, [0.75, 1], [0, 1]) }}
-        >
-          <h2 className="text-2xl font-bold">텍스트 섹션 3</h2>
+          <div className="w-[400px] text-left">
+            <h2 className="text-2xl font-bold mb-4">Faint</h2>
+            <div className="flex items-center gap-4 mb-2">
+              <div className="flex items-center gap-2">
+                <span className="text-xs">위력</span>
+                <div className="flex space-x-1">
+                  {[1, 2, 3, 4, 5].map((_, index) => (
+                    <div
+                      key={index}
+                      className={`w-2 h-2 rounded-full ${
+                        index < 3 ? "bg-yellow-950" : "bg-gray-50"
+                      }`}
+                    ></div>
+                  ))}
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-xs">PP</span>
+                <div className="flex space-x-1">
+                  {[1, 2, 3, 4, 5].map((_, index) => (
+                    <div
+                      key={index}
+                      className={`w-2 h-2 rounded-full ${
+                        index < 2 ? "bg-yellow-950" : "bg-gray-50"
+                      }`}
+                    ></div>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <p className="text-xs">
+              방어나 판별 등을 하고 있는 상대에게 공격할 수 있다. 방어 효과를
+              해제시킨다.
+            </p>
+          </div>
+          <div className="w-[400px]"></div>
         </motion.div>
       </div>
     </div>

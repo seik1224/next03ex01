@@ -1,80 +1,22 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef } from "react";
 import { Canvas, useThree, useFrame } from "@react-three/fiber";
 import { motion, useTransform, MotionValue, useScroll } from "framer-motion";
-import { Model } from "./Model";
-import { PerspectiveCamera, OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
-
-interface Section02Props {
-  scrollYProgress: MotionValue<number>;
-}
-
-// const Scene = ({
-//   scrollYProgress,
-// }: {
-//   scrollYProgress: MotionValue<number>;
-// }) => {
-//   const { camera } = useThree();
-//   const [currentModel, setCurrentModel] = useState(0);
-//   const groupRef = useRef<THREE.Group>();
-
-//   const modelPositions = [
-//     new THREE.Vector3(-5, 0, 20),
-//     new THREE.Vector3(7, 0, 10),
-//     new THREE.Vector3(-10, 0, 0),
-//   ];
-
-//   useEffect(() => {
-//     const handleWheel = (event: WheelEvent) => {
-//       if (event.deltaY > 0) {
-//         setCurrentModel((prev) => (prev + 1) % modelPositions.length);
-//       } else {
-//         setCurrentModel(
-//           (prev) => (prev - 1 + modelPositions.length) % modelPositions.length
-//         );
-//       }
-//     };
-
-//     window.addEventListener("wheel", handleWheel);
-//     return () => window.removeEventListener("wheel", handleWheel);
-//   }, []);
-
-//   useFrame(() => {
-//     if (groupRef.current) {
-//       groupRef.current.position.lerp(modelPositions[currentModel], 0.05);
-//     }
-//     camera.position.lerp(
-//       new THREE.Vector3(
-//         modelPositions[currentModel].x,
-//         2,
-//         modelPositions[currentModel].z + 5
-//       ),
-//       0.05
-//     );
-//   });
-
-//   return (
-//     <group ref={groupRef}>
-//       {modelPositions.map((position, index) => (
-//         <Model key={index} position={position} />
-//       ))}
-//     </group>
-//   );
-// };
+import { Model } from "./Model";
 
 const CameraController = ({
   position,
 }: {
   position: MotionValue<THREE.Vector3>;
 }) => {
-  const { camera } = useThree();
+  const { camera } = useThree(); // 카메라 객체 접근
 
   useFrame(() => {
     const currentPosition = position.get();
     camera.position.lerp(currentPosition, 0.05);
   });
 
-  return null;
+  return null; // 타입스크립트 에러 방지
 };
 
 const Section02 = () => {
@@ -126,7 +68,7 @@ const Section02 = () => {
       style={{ backgroundColor }}
     >
       <div className="sticky top-0 h-screen  w-full overflow-hidden">
-        <Canvas shadows>
+        <Canvas>
           <CameraController position={cameraPosition} />
           <ambientLight intensity={2} />
           <Model />
@@ -134,28 +76,62 @@ const Section02 = () => {
       </div>
       <div className="absolute top-0 left-0 w-full h-[300vh] pointer-events-none">
         <motion.div
-          className="w-full h-screen flex items-center justify-center border-4 border-green-500"
+          className="w-full h-screen flex items-center justify-center border-4 border-green-500 pt-[60vh]"
           style={{
-            opacity: useTransform(sectionProgress, [0.23, 0.33], [0, 1]),
+            opacity: useTransform(
+              sectionProgress,
+              [0.23, 0.33, 0.43, 0.53],
+              [0, 1, 1, 0]
+            ),
           }}
         >
-          <h2 className="text-2xl font-bold">페이지 5</h2>
+          <div className="flex flex-col justify-center items-center text-center max-w-[400px] px-4 pt-4 pb-6 rounded-3xl border border-green-300 bg-green-900 text-white">
+            <h2 className="text-2xl font-bold mb-4">이상해씨</h2>
+            <p className="mb-2 text-green-300">
+              이상해씨 - 이상해풀 - 이상해꽃
+            </p>
+            <p className="text-xs">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi
+              velit quidem saepe dignissimos provident enim eligendi voluptates,
+              quo id expedita,
+            </p>
+          </div>
         </motion.div>
         <motion.div
-          className="w-full h-screen flex items-center justify-center border-4 border-blue-500"
+          className="w-full h-screen flex items-center justify-center border-4 border-blue-500 pt-[60vh]"
           style={{
-            opacity: useTransform(sectionProgress, [0.56, 0.66], [0, 1]),
+            opacity: useTransform(
+              sectionProgress,
+              [0.56, 0.66, 0.76, 0.86],
+              [0, 1, 1, 0]
+            ),
           }}
         >
-          <h2 className="text-2xl font-bold">페이지 6</h2>
+          <div className="flex flex-col justify-center items-center text-center max-w-[400px] px-4 pt-4 pb-6 rounded-3xl border border-blue-300 bg-blue-950 text-white">
+            <h2 className="text-2xl font-bold mb-4">꼬부기</h2>
+            <p className="mb-2 text-blue-300">꼬부기 - 어니부기 - 거북왕</p>
+            <p className="text-xs">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi
+              velit quidem saepe dignissimos provident enim eligendi voluptates,
+              quo id expedita,
+            </p>
+          </div>
         </motion.div>
         <motion.div
-          className="w-full h-screen flex items-center justify-center border-4 border-red-500"
+          className="w-full h-screen flex items-center justify-center border-4 border-red-500 pt-[60vh]"
           style={{
             opacity: useTransform(sectionProgress, [0.9, 1], [0, 1]),
           }}
         >
-          <h2 className="text-2xl font-bold">페이지 7</h2>
+          <div className="flex flex-col justify-center items-center text-center max-w-[400px] px-4 pt-4 pb-6 rounded-3xl border border-red-300 bg-red-950 text-white">
+            <h2 className="text-2xl font-bold mb-4">파이리</h2>
+            <p className="mb-2 text-red-300">파이리 - 리자드 - 리자몽</p>
+            <p className="text-xs">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi
+              velit quidem saepe dignissimos provident enim eligendi voluptates,
+              quo id expedita,
+            </p>
+          </div>
         </motion.div>
       </div>
     </motion.section>
