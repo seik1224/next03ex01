@@ -3,9 +3,10 @@ import { useState, useEffect } from "react";
 // import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js"; // 예전버전
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js"; // 최신버전에서 권장 : npm i --save-dev @types/three
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader.js";
+import Loading from "@/components/Loading";
+import Lenis from "@studio-freight/lenis";
 import Section01 from "./(route)/Section01";
 import Section02 from "./(route)/Section02";
-import Loading from "@/components/Loading";
 
 const modelPaths = [
   "/models/Pika.glb",
@@ -18,6 +19,21 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [progress, setProgress] = useState(0);
   // const [loadedModels, setLoadedModels] = useState<GLTF[]>([]);
+
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    });
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
 
   useEffect(() => {
     const loader = new GLTFLoader();
