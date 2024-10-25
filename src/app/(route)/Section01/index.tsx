@@ -1,14 +1,54 @@
 import React, { useRef, useState, useEffect } from "react";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
 import {
   motion,
   useTransform,
   useMotionValueEvent,
   useScroll,
+  MotionValue,
 } from "framer-motion";
 import * as THREE from "three";
 import Pikachu from "./Model";
+
+const CameraController = ({
+  scrollYProgress,
+}: {
+  scrollYProgress: MotionValue<number>;
+}) => {
+  const pivotRef = useRef<THREE.Group>(null);
+  const { camera } = useThree();
+
+  useEffect(() => {
+    if (pivotRef.current) {
+      pivotRef.current.add(camera);
+      camera.position.set(0, 0, 5);
+      camera.lookAt(0, 0, 0);
+    }
+  }, [camera]);
+
+  useFrame(() => {
+    const progress = scrollYProgress.get();
+    if (pivotRef.current) {
+      const targetPosition = new THREE.Vector3();
+      let targetRotationY = 0;
+
+      if (progress >= 0.1 && progress <= 0.2) {
+        targetPosition.set(0, 1, -5);
+        targetRotationY = -(Math.PI / 180) * 180;
+      }
+
+      pivotRef.current.position.lerp(targetPosition, 0.05);
+      pivotRef.current.rotation.y = THREE.MathUtils.lerp(
+        pivotRef.current.rotation.y,
+        targetRotationY,
+        0.05
+      );
+    }
+  });
+
+  return <group ref={pivotRef} position={[0, 0, 0]} />;
+};
 
 type ActionName = "idle2" | "WalkStanding" | "Run" | "AttackTackle" | "Faint";
 
@@ -60,6 +100,7 @@ const Section01 = () => {
         className="sticky top-0 h-screen w-full overflow-hidden"
       >
         <Canvas>
+          <CameraController scrollYProgress={scrollYProgress} />
           <ambientLight intensity={2} />
           <pointLight position={[10, 10, 10]} />
           <Pikachu animation={animation} position={position} />

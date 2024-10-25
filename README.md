@@ -38,3 +38,57 @@
    - 모델 1위치 : 0, 0, 20
    - 모델 2위치 : 7, 0, 10
    - 모델 3위치 : -10, 0, 0
+
+---
+
+# 3. Section1 카메라 구도
+
+- 다 하신 분들은 카메라 구도를 스크롤에따라 자유롭게 변경해보세요.
+
+---
+
+# 4. glb로딩
+
+- 아래 코드는 GLTF로드에 따라 프로그레스바를 만드는 과정입니다. 아래 코드 참고하여 로딩 프로그레스를 완성해보세요.
+
+```bash
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { GLTF } from "three/examples/jsm/loaders/GLTFLoader.js";
+
+useEffect(() => {
+   const loader = new GLTFLoader();
+
+
+   const loadModel = (path: string) => {
+   return new Promise<GLTF>((resolve, reject) => {
+      loader.load();
+   });
+   };
+
+   Promise.all()
+   .then(() => {
+   })
+   .catch(() => {
+   });
+}, []);
+```
+
+- const loader = new GLTFLoader();
+  new GLTFLoader : Three.js 라이브러리, 파일을 로드하고 파싱하는 데 사용
+
+- load메서드 : 이 메서드를 사용하여 실제로 GLTF 파일을 로드
+  load(모델파일경로, 성공콜백함수, 진행상황콜백, 오류콜백함수)
+
+- Promise.all : 여러개의 프로미스를 병렬로 처리하고 싶을 때 사용
+
+```bash
+const promise1 = Promise.resolve(3);
+const promise2 = 42;
+const promise3 = new Promise((resolve, reject) => {
+  setTimeout(resolve, 100, '완료');
+});
+
+Promise.all([promise1, promise2, promise3]).then((values) => {
+  console.log(values); // [3, 42, '완료']
+});
+```
