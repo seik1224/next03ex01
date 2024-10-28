@@ -43,7 +43,7 @@ interface PikachuProps {
 
 const Pikachu = ({ animation, position }: PikachuProps) => {
   const group = useRef<THREE.Group>(null);
-  const { scene, animations } = useGLTF("/models/Pika.glb") as GLTFResult;
+  const { scene, animations } = useGLTF("/models/Pikachu.glb") as GLTFResult;
   const clone = React.useMemo(() => SkeletonUtils.clone(scene), [scene]);
   const { nodes, materials } = useGraph(clone) as GLTFResult;
   const { actions } = useAnimations(animations, group);
@@ -127,4 +127,4 @@ const Pikachu = ({ animation, position }: PikachuProps) => {
 
 export default Pikachu;
 
-useGLTF.preload("/models/Pika.glb");
+useGLTF.preload("/models/Pikachu.glb");
