@@ -76,7 +76,7 @@ const Section02 = () => {
       </div>
       <div className="absolute top-0 left-0 w-full h-[300vh] pointer-events-none">
         <motion.div
-          className="w-full h-screen flex items-center justify-center border-4 border-green-500 pt-[60vh]"
+          className="w-full h-screen flex items-center justify-center  pt-[60vh]"
           style={{
             opacity: useTransform(
               sectionProgress,
@@ -98,7 +98,7 @@ const Section02 = () => {
           </div>
         </motion.div>
         <motion.div
-          className="w-full h-screen flex items-center justify-center border-4 border-blue-500 pt-[60vh]"
+          className="w-full h-screen flex items-center justify-center  pt-[60vh]"
           style={{
             opacity: useTransform(
               sectionProgress,
@@ -118,7 +118,7 @@ const Section02 = () => {
           </div>
         </motion.div>
         <motion.div
-          className="w-full h-screen flex items-center justify-center border-4 border-red-500 pt-[60vh]"
+          className="w-full h-screen flex items-center justify-center  pt-[60vh]"
           style={{
             opacity: useTransform(sectionProgress, [0.9, 1], [0, 1]),
           }}
