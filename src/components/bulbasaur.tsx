@@ -17,16 +17,23 @@ type GLTFResult = GLTF & {
     Bulbasaur_5C8A66: THREE.Mesh;
   };
   materials: {
-    Bulbasaur_92CFB0: THREE.MeshStandardMaterial;
-    Bulbasaur_FFFFFF: THREE.MeshStandardMaterial;
-    Bulbasaur_AD3946: THREE.MeshStandardMaterial;
-    Bulbasaur_6BA966: THREE.MeshStandardMaterial;
-    Bulbasaur_5C8A66: THREE.MeshStandardMaterial;
+    Bulbasaur_92CFB0: THREE.MeshPhysicalMaterial;
+    Bulbasaur_FFFFFF: THREE.MeshPhysicalMaterial;
+    Bulbasaur_AD3946: THREE.MeshPhysicalMaterial;
+    Bulbasaur_6BA966: THREE.MeshPhysicalMaterial;
+    Bulbasaur_5C8A66: THREE.MeshPhysicalMaterial;
   };
 };
 
 export function Bulbasaur(props: JSX.IntrinsicElements["group"]) {
   const { nodes, materials } = useGLTF("/models/bulbasaur.glb") as GLTFResult;
+
+  // 모든 재질에 대해 기본 PBR 속성 설정
+  Object.values(materials).forEach((material) => {
+    material.roughness = 0.8;
+    material.metalness = 0.2;
+  });
+
   return (
     <group {...props} dispose={null}>
       <mesh

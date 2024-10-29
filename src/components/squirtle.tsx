@@ -19,18 +19,26 @@ type GLTFResult = GLTF & {
     Squirtle_Water_White: THREE.Mesh;
   };
   materials: {
-    Squirtle_Water_83CFDF: THREE.MeshStandardMaterial;
-    Squirtle_Water_E09AA4: THREE.MeshStandardMaterial;
-    Squirtle_Water_B76A91: THREE.MeshStandardMaterial;
-    Squirtle_Water_Black: THREE.MeshStandardMaterial;
-    Squirtle_Water_DCD36F: THREE.MeshStandardMaterial;
-    Squirtle_Water_AD7757: THREE.MeshStandardMaterial;
-    Squirtle_Water_White: THREE.MeshStandardMaterial;
+    Squirtle_Water_83CFDF: THREE.MeshPhysicalMaterial;
+    Squirtle_Water_E09AA4: THREE.MeshPhysicalMaterial;
+    Squirtle_Water_B76A91: THREE.MeshPhysicalMaterial;
+    Squirtle_Water_Black: THREE.MeshPhysicalMaterial;
+    Squirtle_Water_DCD36F: THREE.MeshPhysicalMaterial;
+    Squirtle_Water_AD7757: THREE.MeshPhysicalMaterial;
+    Squirtle_Water_White: THREE.MeshPhysicalMaterial;
   };
 };
 
 export function Squirtle(props: JSX.IntrinsicElements["group"]) {
   const { nodes, materials } = useGLTF("/models/squirtle.glb") as GLTFResult;
+
+  // 모든 재질에 대해 기본 PBR 속성 설정
+  Object.values(materials).forEach((material) => {
+    material.roughness = 0.8;
+    material.metalness = 0.2;
+    // material.envMapIntensity = 1;
+  });
+
   return (
     <group {...props} dispose={null}>
       <mesh

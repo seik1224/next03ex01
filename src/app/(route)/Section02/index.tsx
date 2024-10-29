@@ -3,6 +3,7 @@ import { Canvas, useThree, useFrame } from "@react-three/fiber";
 import { motion, useTransform, MotionValue, useScroll } from "framer-motion";
 import * as THREE from "three";
 import { Model } from "./Model";
+import { Environment } from "@react-three/drei";
 
 const CameraController = ({
   position,
@@ -70,7 +71,8 @@ const Section02 = () => {
       <div className="sticky top-0 h-screen  w-full overflow-hidden">
         <Canvas>
           <CameraController position={cameraPosition} />
-          <ambientLight intensity={2} />
+          <ambientLight intensity={1.5} />
+          <directionalLight position={[10, 10, 5]} intensity={3} />
           <Model />
         </Canvas>
       </div>

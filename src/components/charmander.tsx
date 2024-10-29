@@ -21,20 +21,28 @@ type GLTFResult = GLTF & {
     Charmander_384C68: THREE.Mesh;
   };
   materials: {
-    Charmander_F16451: THREE.MeshStandardMaterial;
-    Charmander_FEA77A: THREE.MeshStandardMaterial;
-    Charmander_ECEEC7: THREE.MeshStandardMaterial;
-    Charmander_Black: THREE.MeshStandardMaterial;
-    Charmander_White: THREE.MeshStandardMaterial;
-    Charmander_EC6953: THREE.MeshStandardMaterial;
-    Charmander_7D2821: THREE.MeshStandardMaterial;
-    Charmander_82B2F3: THREE.MeshStandardMaterial;
-    Charmander_384C68: THREE.MeshStandardMaterial;
+    Charmander_F16451: THREE.MeshPhysicalMaterial;
+    Charmander_FEA77A: THREE.MeshPhysicalMaterial;
+    Charmander_ECEEC7: THREE.MeshPhysicalMaterial;
+    Charmander_Black: THREE.MeshPhysicalMaterial;
+    Charmander_White: THREE.MeshPhysicalMaterial;
+    Charmander_EC6953: THREE.MeshPhysicalMaterial;
+    Charmander_7D2821: THREE.MeshPhysicalMaterial;
+    Charmander_82B2F3: THREE.MeshPhysicalMaterial;
+    Charmander_384C68: THREE.MeshPhysicalMaterial;
   };
 };
 
 export function Charmander(props: JSX.IntrinsicElements["group"]) {
   const { nodes, materials } = useGLTF("/models/charmander.glb") as GLTFResult;
+
+  // 모든 재질에 대해 기본 PBR 속성 설정
+  Object.values(materials).forEach((material) => {
+    material.roughness = 0.8;
+    material.metalness = 0.2;
+    // material.envMapIntensity = 1;
+  });
+
   return (
     <group {...props} dispose={null}>
       <mesh
